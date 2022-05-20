@@ -20,8 +20,8 @@ y[y>= 4] = 1
 
 X = df.to_numpy()
 X = preprocessing.scale(X) # Is standard
-# Impute NaNs
 
+# Impute NaNs
 imp = SimpleImputer(missing_values=np.nan, strategy='mean')
 imp.fit(X)
 X = imp.transform(X)
@@ -30,6 +30,7 @@ X = imp.transform(X)
 # Linear model
 clf = LogisticRegression()
 yhat = cross_val_predict(clf, X, y, cv=5)
+print(X.shape , yhat.shape)
 
 acc = np.mean(yhat==y)
 tn, fp, fn, tp = confusion_matrix(y, yhat).ravel()
